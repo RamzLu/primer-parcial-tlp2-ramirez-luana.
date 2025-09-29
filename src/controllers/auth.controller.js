@@ -57,8 +57,16 @@ export const login = async (req, res) => {
 };
 
 export const getProfile = async (req, res) => {
+  const user = req.user;
   try {
     // TODO: devolver profile del user logueado actualmente
+    const profile = {
+      first_name: user.first_name,
+      last_name: user.last_name,
+      employee_number: user.employee_number,
+      phone: user.phone,
+    };
+    console.log(user);
     return res.status(200).json({ data: profile });
   } catch (error) {
     console.log(error);
