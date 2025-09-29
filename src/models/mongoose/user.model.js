@@ -45,9 +45,19 @@ const UserSchema = new Schema(
       },
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
 
+UserSchema.virtual("assets", {
+  ref: "Asset",
+  localField: "_id",
+  foreignField: "responsible",
+});
 // ! FALTA COMPLETAR ACA
+// para no mostrar los campos eliminados logicamente
+UserSchema.pre(/^find/, function (next) {
+  this.where({ deletedAt: null });
+  next();
+});
 
 export const UserModel = model("User", UserSchema);
