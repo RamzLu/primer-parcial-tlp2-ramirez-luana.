@@ -74,7 +74,7 @@ export const getProfile = async (req, res) => {
   }
 };
 
-export const logout = async (_req, res) => {
+export const logout = async (req, res) => {
   res.clearCookie("token");
   return res.status(204).json({ msg: "Sesión cerrada correctamente" });
 };
