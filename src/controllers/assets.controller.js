@@ -1,3 +1,5 @@
+import { AssetModel } from "../models/mongoose/asset.model.js";
+
 export const createAsset = async (req, res) => {
   try {
     // TODO: crear asset (usuario autenticado)
@@ -28,9 +30,14 @@ export const getMyAssets = async (req, res) => {
 };
 
 export const deleteAsset = async (req, res) => {
+  const { id } = req.params;
   try {
     // TODO: eliminar un asset (solo si el usuario logueado es el responsible del asset)
-    return res.status(204).json({ msg: "Asset eliminado correctamente" });
+    const asset = await AssetModel.findOneAndDelete(id);
+    return res.status(204).json({
+      msg: "Asset eliminado correctamente",
+      data: asset,
+    });
   } catch (error) {
     return res.status(500).json({ msg: "Error interno del servidor" });
   }

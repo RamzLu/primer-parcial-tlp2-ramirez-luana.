@@ -1,5 +1,4 @@
-import { Schema, model } from "mongoose";
-import { Types } from "mysql2";
+import { Schema, Types, model } from "mongoose";
 
 // TODO: completar relaciones embebidas y referenciadas
 
@@ -24,7 +23,7 @@ const AssetSchema = new Schema(
     // ! FALTA COMPLETAR ACA
 
     // *Relacion 1:N con User
-    user: {
+    responsible: {
       type: Types.ObjectId,
       ref: "User",
       requiered: true,
@@ -37,5 +36,16 @@ const AssetSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// AssetSchema.post("findOneAndDelete", async function (doc) {
+//   //* doc seria el asset borrado
+//   if(doc){
+//     try {
+//       await
+//     } catch (error) {
+
+//     }
+//   }
+// });
 
 export const AssetModel = model("Asset", AssetSchema);
