@@ -21,4 +21,4 @@ authRoutes.post("/auth/login", login);
 authRoutes.get("/auth/profile", authMiddleware, getProfile);
 
 // * cerrar sesión (usuario autenticado)
-authRoutes.post("/auth/logout", logout);
+authRoutes.post("/auth/logout", authMiddleware, logout);
